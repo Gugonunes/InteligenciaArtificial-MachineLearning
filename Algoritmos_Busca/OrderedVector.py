@@ -14,8 +14,9 @@ class OrderedVector:
             for i in range(self.last_position + 1):
                 print(i, ' - ', self.values[i])
 
+    #O(n)
     def insert(self, value):
-        if self.last_position == self.capacity - 1
+        if self.last_position == self.capacity - 1:
             print('Maximum capacity')
             return
 
@@ -24,6 +25,8 @@ class OrderedVector:
             position = i
             if self.values[i] > value:
                 break
+            if i==self.last_position:
+                position = i+1;
             
         x = self.last_position
         while x >= position:
@@ -32,3 +35,11 @@ class OrderedVector:
 
         self.values[position] = value
         self.last_position += 1
+
+#Test
+vector = OrderedVector(10)
+vector.insert(6)
+vector.insert(4)
+vector.insert(3)
+vector.insert(8)
+vector.print()
