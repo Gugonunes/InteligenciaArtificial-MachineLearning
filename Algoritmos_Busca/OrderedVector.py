@@ -1,10 +1,9 @@
 import numpy as np
-
 class OrderedVector:
     def __init__(self, capacity):
         self.capacity = capacity
         self.last_position = -1
-        self.values = np.empty(self.capacity, dtype=int)
+        self.values = np.empty(self.capacity, dtype=object)
 
     # O(n)
     def print(self):
@@ -12,7 +11,7 @@ class OrderedVector:
             print('Vector is empty')
         else:
             for i in range(self.last_position + 1):
-                print(i, ' - ', self.values[i])
+                print(i, ' - ', self.values[i].rotule, ' - ', self.values[i].distance_objective)
 
     #O(n)
     def insert(self, value):
@@ -23,7 +22,7 @@ class OrderedVector:
         position = 0
         for i in range(self.last_position + 1):
             position = i
-            if self.values[i] > value:
+            if self.values[i].distance_objective > value.distance_objective:
                 break
             if i==self.last_position:
                 position = i+1;
@@ -37,9 +36,4 @@ class OrderedVector:
         self.last_position += 1
 
 #Test
-vector = OrderedVector(10)
-vector.insert(6)
-vector.insert(4)
-vector.insert(3)
-vector.insert(8)
-vector.print()
+
