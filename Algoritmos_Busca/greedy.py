@@ -6,16 +6,16 @@ class Greedy:
         self.objective = objective
         self.found = False
 
-    def find(self, actual):
+    def find(self, current):
         print('-------')
-        print(f'Actual: {actual.rotule}')
-        actual.visited = True
+        print(f'current: {current.rotule}')
+        current.visited = True
 
-        if actual == self.objective:
+        if current == self.objective:
             self.found = True
         else:
-            ordered_vector = OrderedVector(len(actual.adjacent))
-            for adjacent in actual.adjacent:
+            ordered_vector = OrderedVector(len(current.adjacent))
+            for adjacent in current.adjacent:
                 if adjacent.vertex.visited == False:
                     adjacent.vertex.visited == True
                     ordered_vector.insert(adjacent.vertex)
