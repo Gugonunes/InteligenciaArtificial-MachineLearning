@@ -37,7 +37,7 @@ def print_flights(schedule):
         returning = flights[(destiny, origin)][schedule[id_flight]]
         total_price += returning[2]
         print('%10s%10s %5s-%5s %3s %5s-%5s %3s' % (name, origin, going[0], going[1], going[2], returning[0], returning[1], returning[2]))
-        print('Total pricee: ', total_price)
+        print('Total price: ', total_price)
 
 # print_flights(schedule)
 
@@ -61,12 +61,22 @@ fitness = mlrose.CustomFitness(fitness_function)
 problem = mlrose.DiscreteOpt(length=12, fitness_fn=fitness, maximize=False, max_val=10)
 
 #HILL CLIMB
-
+print('Hill Climb solution: ')
 best_solution, best_price = mlrose.hill_climb(problem, random_state=3)
 print(best_solution, best_price)
 print_flights(best_solution)
+print('------------')
 
 #SIMULATED ANNEALING
+print('Simulated annaling solution: ')
 best_solution, best_price = mlrose.simulated_annealing(problem, schedule=mlrose.decay.GeomDecay(init_temp=10000), random_state=1)
 print(best_solution, best_price)
 print_flights(best_solution)
+print('------------')
+
+#GENETIC ALGORITHM
+print('Genetic Alg solution: ')
+best_solution, best_price = mlrose.genetic_alg(problem, pop_size=500, mutation_prob=0.2, random_state=1)
+print(best_solution, best_price)
+print_flights(best_solution)
+print('------------')
