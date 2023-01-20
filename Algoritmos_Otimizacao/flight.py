@@ -65,3 +65,8 @@ problem = mlrose.DiscreteOpt(length=12, fitness_fn=fitness, maximize=False, max_
 best_solution, best_price = mlrose.hill_climb(problem, random_state=3)
 print(best_solution, best_price)
 print_flights(best_solution)
+
+#SIMULATED ANNEALING
+best_solution, best_price = mlrose.simulated_annealing(problem, schedule=mlrose.decay.GeomDecay(init_temp=10000), random_state=1)
+print(best_solution, best_price)
+print_flights(best_solution)
