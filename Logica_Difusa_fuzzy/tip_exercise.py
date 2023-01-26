@@ -12,9 +12,9 @@ tip = ctrl.Consequent(np.arange(0, 21, 1), 'tip')
 quality.automf(number=3, names=['bad', 'good', 'tasty'])
 service.automf(number=3, names=['bad', 'ok', 'good'])
 
-tip['low'] = fuzz.trimf(tip.universe, [0, 0, 10])
-tip['medium'] = fuzz.trimf(tip.universe, [0, 10, 20])
-tip['high'] = fuzz.trimf(tip.universe, [10, 20, 20])
+tip['low'] = fuzz.sigmf(tip.universe, 5, -1)
+tip['medium'] = fuzz.gaussmf(tip.universe, 10, 3)
+tip['high'] = fuzz.pimf(tip.universe, 10, 20, 20, 21)
 
 rule1= ctrl.Rule(quality['bad'] | service['bad'], tip['low'])
 rule2= ctrl.Rule(service['ok'], tip['medium'])
@@ -30,4 +30,3 @@ system.compute()
 
 print(system.output['tip'])
 tip.view(sim = system)
-n = input()
