@@ -1,0 +1,1 @@
+Obs: as yahoo finance was discontinued i could not implement time series
