@@ -22,3 +22,11 @@ Repositório para realização do curso "Inteligência Artificial e Machine Lear
 <li> Agrupamento
 <li> Associação
 <li> Aprendizado por reforço
+
+##
+☑️ Redes Neurais e Deep Learning
+<li> Perceptron
+<li> Descida do gradiente
+<li> Redes Neurais
+<li> Deep Learning com TensorFlow
+<li> Redes convolucionais
