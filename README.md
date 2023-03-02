@@ -30,3 +30,6 @@ Repositório para realização do curso "Inteligência Artificial e Machine Lear
 <li> Redes Neurais
 <li> Deep Learning com TensorFlow
 <li> Redes convolucionais
+
+##
+☐ Processamento de linguagens Naturais
