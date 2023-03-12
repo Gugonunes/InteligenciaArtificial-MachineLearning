@@ -97,9 +97,11 @@ for i in matches:
   texto += "<br/><br/>"
 display(HTML(f"""... { texto } ..."""))
 
+for entidade in doc.ents:
+  print(entidade.text, entidade.label_)
 
-
-
+from spacy import displacy
+displacy.render(doc, style = 'ent', jupyter = True)
 
 
 
