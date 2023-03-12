@@ -63,6 +63,42 @@ conteudo
 conteudo = conteudo.lower()
 conteudo
 
+pln = spacy.load('pt_core_news_sm')
+pln
+
+string = 'turing'
+token_pesquisa = pln(string)
+
+from spacy.matcher import PhraseMatcher
+matcher = PhraseMatcher(pln.vocab)
+matcher.add('SEARCH', None, token_pesquisa)
+
+doc = pln(conteudo)
+matches = matcher(doc)
+matches
+
+doc[3351:3352]
+
+matches[0]
+
+from IPython.core.display import HTML
+texto = ''
+numero_palavras = 50
+doc = pln(conteudo)
+matches = matcher(doc)
+
+display(HTML(f'<h1>{string.upper()}</h1>'))
+display(HTML(f"""<p><strong>Resultados encontrados: </strong> {len(matches)}</p>"""))
+for i in matches:
+  inicio = i[1] - numero_palavras
+  if inicio < 0:
+    inicio = 0
+  texto += str(doc[inicio:i[2] + numero_palavras]).replace(string, f"<mark> {string} </mark>")
+  texto += "<br/><br/>"
+display(HTML(f"""... { texto } ..."""))
+
+
+
 
 
 
