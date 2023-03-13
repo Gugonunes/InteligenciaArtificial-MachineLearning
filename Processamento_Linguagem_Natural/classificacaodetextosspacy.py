@@ -27,7 +27,33 @@ base_dados.tail()
 
 sns.countplot(base_dados['emocao'], label = 'Contagem');
 
+pontuacoes = string.punctuation
+pontuacoes
 
+from spacy.lang.pt.stop_words import STOP_WORDS
+stop_words = STOP_WORDS
+print(stop_words)
+len(stop_words)
+
+pln = spacy.load('pt_core_news_sm')
+pln
+
+def preprocessamento(texto):
+  texto = texto.lower()
+  documento = pln(texto)
+
+  lista = []
+  for token in documento:
+    #lista.append(token.text)
+    lista.append(token.lemma_)
+
+  lista = [palavra for palavra in lista if palavra not in stop_words and palavra not in pontuacoes]
+  lista = ' '.join([str(elemento) for elemento in lista if not elemento.isdigit()])
+
+  return lista
+
+teste = preprocessamento('Estou aprendendo 1 10 11 processamento de linguagem natural')
+teste
 
 
 
