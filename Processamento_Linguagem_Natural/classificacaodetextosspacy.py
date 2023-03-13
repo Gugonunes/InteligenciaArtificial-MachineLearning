@@ -55,9 +55,10 @@ def preprocessamento(texto):
 teste = preprocessamento('Estou aprendendo 1 10 11 processamento de linguagem natural')
 teste
 
+base_dados.head(10)
 
-
-
+base_dados['texto'] = base_dados['texto'].apply(preprocessamento)
+base_dados.head(10)
 
 
 
