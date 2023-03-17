@@ -8,7 +8,9 @@ Original file is located at
 """
 
 !pip install spacy --upgrade
-!python3 -m spacy download pt_core_news_sm
+!pip install -q spacy==2.2.3 #Atualizado: 02/05/2021 Obs: utilizar esta versão.
+
+!python3 -m spacy download pt
 
 import pandas as pd
 import string
@@ -52,8 +54,9 @@ def preprocessamento(texto):
 
   return lista
 
-teste = preprocessamento('Estou aprendendo 1 10 11 processamento de linguagem natural')
-teste
+texto_teste = '@behin_d_curtain :D Para :( mim, http://www.iaexpert.com.br é precisamente o contrário :) Vem a chuva e vem a boa disposição :)'
+resultado = preprocessamento(texto_teste)
+resultado
 
 base_dados.head(10)
 
@@ -88,4 +91,45 @@ base_dados_final[0][1]
 type(base_dados_final[0][1])
 
 base_dados_final
+
+modelo = spacy.blank('pt')
+categorias = modelo.add_pipe("textcat")
+categorias.add_label("ALEGRIA")
+categorias.add_label("MEDO")
+historico = []
+
+from spacy.training.example import Example
+
+modelo.begin_training()
+for epoca in range(1000):
+    random.shuffle(base_dados_final)
+    losses = {}
+    exemplos = []
+    for texto, entities in base_dados_final:
+        doc = modelo.make_doc(texto)
+        exemplo = Example.from_dict(doc, {"cats": entities})
+        exemplos.append(exemplo)
+    modelo.update(exemplos, losses=losses)
+    if epoca % 100 == 0:
+        print(losses)
+        historico.append(losses)
+
+historico_loss = []
+for i in historico:
+  historico_loss.append(i.get('textcat'))
+
+historico_loss = np.array(historico_loss)
+historico_loss
+
+import matplotlib.pyplot as plt
+plt.plot(historico_loss)
+plt.title('Progressão do erro')
+plt.xlabel("Épocas")
+plt.ylabel("Erro")
+
+modelo.to_disk("modelo")
+
+
+
+
 
