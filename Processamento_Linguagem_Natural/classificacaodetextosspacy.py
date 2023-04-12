@@ -27,7 +27,7 @@ base_dados.head()
 
 base_dados.tail()
 
-sns.countplot(base_dados['emocao'], label = 'Contagem');
+sns.countplot(base_dados['emocao'], label = 'Contagem')
 
 pontuacoes = string.punctuation
 pontuacoes
@@ -129,7 +129,23 @@ plt.ylabel("Erro")
 
 modelo.to_disk("modelo")
 
+modelo_carregado = spacy.load("modelo")
+modelo_carregado
 
+texto_positivo = "eu adoro a cor dos seus olhos"
 
+texto_positivo = preprocessamento(texto_positivo)
+texto_positivo
 
+previsao = modelo_carregado(texto_positivo)
+previsao
 
+previsao.cats
+
+texto_negativo = 'estou com medo dele'
+previsao = modelo_carregado(preprocessamento(texto_negativo))
+previsao.cats
+
+texto_random = 'o daniel é bonito'
+previsao = modelo_carregado(preprocessamento(texto_random))
+previsao.cats
