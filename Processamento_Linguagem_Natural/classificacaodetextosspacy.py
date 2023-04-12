@@ -149,3 +149,33 @@ previsao.cats
 texto_random = 'o daniel é bonito'
 previsao = modelo_carregado(preprocessamento(texto_random))
 previsao.cats
+
+previsoes = []
+for texto in base_dados['texto']:
+  #print(texto)
+  previsao = modelo_carregado(texto)
+  previsoes.append(previsao.cats)
+
+previsoes
+
+previsoes_final = []
+for previsao in previsoes:
+  if previsao['ALEGRIA'] > previsao['MEDO']:
+    previsoes_final.append('alegria')
+  else:
+    previsoes_final.append('medo')
+previsoes_final = np.array(previsoes_final)
+
+previsoes_final
+
+respostas_reais = base_dados['emocao'].values
+respostas_reais
+
+from sklearn.metrics import confusion_matrix, accuracy_score
+accuracy_score(respostas_reais, previsoes_final)
+
+cm = confusion_matrix(respostas_reais, previsoes_final)
+cm
+
+
+
