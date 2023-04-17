@@ -177,5 +177,37 @@ accuracy_score(respostas_reais, previsoes_final)
 cm = confusion_matrix(respostas_reais, previsoes_final)
 cm
 
+base_dados_testes = pd.read_csv('/content/base_teste.txt', encoding = 'utf-8')
+
+base_dados_testes.head()
+
+base_dados_testes['texto'] = base_dados_testes['texto'].apply(preprocessamento)
+
+base_dados_testes
+
+previsoes = []
+for texto in base_dados_testes['texto']:
+  #print(texto)
+  previsao = modelo_carregado(texto)
+  previsoes.append(previsao.cats)
+
+previsoes_final = []
+for previsao in previsoes:
+  if previsao['ALEGRIA'] > previsao['MEDO']:
+    previsoes_final.append('alegria')
+  else:
+    previsoes_final.append('medo')
+previsoes_final = np.array(previsoes_final)
+
+respostas_reais = base_dados_testes['emocao'].values
+respostas_reais
+
+accuracy_score(respostas_reais, previsoes_final)
+
+cm = confusion_matrix(respostas_reais, previsoes_final)
+cm
+
+
+
 
 
