@@ -16,7 +16,7 @@ import cv2 # OpenCV
 imagem = cv2.imread('/content/workplace-1245776_1920.jpg')
 
 #cv2.imshow(imagem)
-from google.colab.patches import cv2_imshow
+from google.colab.patches import 'cv2_imshow'
 cv2_imshow(imagem)
 
 detector_face = cv2.CascadeClassifier('/content/haarcascade_frontalface_default.xml')
