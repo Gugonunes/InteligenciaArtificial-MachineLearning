@@ -32,4 +32,16 @@ Repositório para realização do curso "Inteligência Artificial e Machine Lear
 <li> Redes convolucionais
 
 ##
-☐ Processamento de linguagens Naturais
+☑️ Processamento de linguagens Naturais 
+<li> SpaCy
+<li> WordCloud
+<li> Classificação de sentimentos com SpaCy
+  
+##
+☑️ Visão Computacional
+<li> Detecção de objetos
+<li> Detecção de faces
+<li> Rastreamento de objetos
+  
+##
+☐ Sistemas multiagente
