@@ -2,11 +2,22 @@ from pade.misc.utility import display_message, start_loop
 from pade.core.agent import Agent
 from pade.acl.aid import AID
 from sys import argv
+from pade.bahaviouers.protocols import TimedBehaviour
+
+class Comportamento(TimedBehaviour):
+    def __init__(self, agent, time):
+        super(Comportamento, self).__init__(agent, time)
+
+    def on_time(self):
+        super(Comportamento, self).on_time()
+        display_message(self.agent.name, 'Olá do agente ' + str(self.agent.aid.localname))
 
 class Agente(Agente):
     def __init__(self, aid):
         super(Agente, self).__init__(aid=aid)
-        display_message(self.aod.localname, 'Olá')
+        #display_message(self.aod.localname, 'Olá')
+        comportamento = Comportamento(self, 2.0)
+        self.behaviours.append(comportamento)
 
 if __name__ == '__main__':
     numero_agentes = 2
