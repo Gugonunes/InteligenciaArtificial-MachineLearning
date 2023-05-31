@@ -19,3 +19,40 @@ class ComportamentoVendedor(FipaRequestProtocol):
         resposta.set_performative(ACLMessage.INFORM)
         resposta.set_content(self.produtos)
         self.agent.send(resposta)
+
+class ComportamentoComprador(FipaRequestProtocol):
+    def __init__(self, agent):
+        super(ComportamentoComprador, self).__init__(agent=agent, message=None, is_initiator=True)
+      
+    def handle_inform(self, message):
+        display_message(self.agent.aid.localname, message.content)
+
+class ComportamentoTemporal(TimedBehaviour):
+    def __init__(self, agent, time, message):
+        super(ComportamentoTemporal, self).__init__(agent, time)
+        self.message = message
+
+    def on_time(self):
+        super(ComportamentoTemporal, self).on_time()
+        self.agent.send(self.message)
+
+class AgenteVendedor(Agent):
+    def __init__(self, aid):
+        super(AgenteVendedor, self).__init__(aid=aid)
+        self.comport_request = ComportamentoVendedor(self)
+        self.behaviours.append(self.comport_request)
+
+class AgenteComprador(Agent):
+    def __init__(self, aid, recebedor):
+        super(AgenteComprador, self).__init__(aid=aid)
+
+        mensagem = ACLMessage(ACLMessage.REQUEST)
+        mensagem.set_protocol(ACLMessage.FIPA_REQUEST_PROTOCOL)
+        mensagem.add_receiver(AID(name=recebedor))
+        mensagem.set_content('Quais produtos você tem?')
+
+        self.comport_request = ComportamentoComprador(self, mensagem)
+        self.comport_temp = ComportamentoTemporal(self, 8.0, mensagem)
+
+        self.behaviours.append(self.comport_request)
+        self.behaviours.append(self.comport_temp)
