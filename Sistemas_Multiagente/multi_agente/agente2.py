@@ -56,3 +56,21 @@ class AgenteComprador(Agent):
 
         self.behaviours.append(self.comport_request)
         self.behaviours.append(self.comport_temp)
+
+if __name__ == '__main__':
+  numero_agentes = 1
+  c = 0
+  agentes = list()
+  for i in range(numero_agentes):
+      porta = int(argv[1]) + c
+      nome_agente_vendedor = 'agente_vendedor_{}@localhost:{}'.format(porta, porta)
+      agente_vendedor = AgenteVendedor(AID(name=nome_agente_vendedor))
+      agentes.append(agente_vendedor)
+
+      nome_agente_comprador = 'agente_comprador_{}@localhost:{}'.format(porta - 10000, porta - 10000)
+      agente_comprador = AgenteComprador(AID(name=nome_agente_comprador), nome_agente_vendedor)
+      agentes.append(agente_comprador)
+
+      c += 500
+
+  start_loop(agentes)
