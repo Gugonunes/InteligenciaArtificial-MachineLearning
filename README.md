@@ -44,4 +44,13 @@ Repositório para realização do curso "Inteligência Artificial e Machine Lear
 <li> Rastreamento de objetos
   
 ##
-☐ Sistemas multiagente
+☑️ Sistemas multiagente
+<li> Criação
+<li> Comportamentos
+<li> Comunicação
+
+##
+☑️ Outras áreas da inteligência artificial
+<li> Sistemas especialistas
+<li> GPS(General Problem Solver)
+<li> Redes Bayesianas
